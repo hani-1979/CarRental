@@ -23,7 +23,7 @@ namespace CarRentalApp.Services
 
         
 
-        public async Task<IEnumerable<Classification>> GetAllModeelsAsync()
+        public async Task<IEnumerable<Classification>> GetAllClassificationAsync()
         {
             return await _classificationrepository.GetAllAsync();
         }

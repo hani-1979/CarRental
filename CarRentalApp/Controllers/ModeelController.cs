@@ -11,15 +11,28 @@ namespace CarRentalApp.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IManufactorerservice _manufactorerservice;
+        private readonly IModeelService _modeelService;
 
-        public ModeelController(AppDbContext context,IManufactorerservice manufactorerservice)
+        public ModeelController(AppDbContext context,IManufactorerservice manufactorerservice,IModeelService modeelService)
         {
             _context = context;
             _manufactorerservice = manufactorerservice;
+            _modeelService = modeelService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var cars = _context.Modeels
+             .Join(_context.Manufactorers, // Assuming there's a Manufacturers table in your database
+                   car => car.ManufactorerId, // Foreign key on Modeel (Car) to Manufacturer
+                   manufacturer => manufacturer.ManufactorerId, // Primary key of Manufacturer
+                   (car, manufacturer) => new ManufaCarViewModel
+                   {
+                       ManufactorNameAr = manufacturer.ManufactorNameAr,
+                       ModeelNameAr = car.ModeelNameAr,
+                       ModeelNameEn = car.ModeelNameEn // Assuming the Manufacturer model has a 'Name' property
+                   })
+             .ToList();
+            return View(cars);
         }
         public async Task<IActionResult> Create()
         {

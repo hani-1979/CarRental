@@ -1,8 +1,4 @@
-﻿@model CarRentalApp.Models.Branch
-
-@{
-    ViewData["Title"] = "Create";
-}
+﻿@model CarRentalApp.Models.Colour
 
 <div style="padding-top:80px"></div>
 
@@ -11,20 +7,20 @@
 
 
         <div class="card-body">
-            <h5 class="card-title">إضافة فرع </h5>
+            <h5 class="card-title">إضافة الوان السيارات</h5>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BranchNameAr" class="control-label"></label>
-                <input asp-for="BranchNameAr" class="form-control" />
-                <span asp-validation-for="BranchNameAr" class="text-danger"></span>
+                <label asp-for="ColourNameAr" class="control-label"></label>
+                <input asp-for="ColourNameAr" class="form-control" />
+                <span asp-validation-for="ColourNameAr" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="branchnameEn" class="control-label"></label>
-                <input asp-for="branchnameEn" class="form-control" />
-                <span asp-validation-for="branchnameEn" class="text-danger"></span>
+                <label asp-for="ColourNameEn" class="control-label"></label>
+                <input asp-for="ColourNameEn" class="form-control" />
+                <span asp-validation-for="ColourNameEn" class="text-danger"></span>
             </div>
                         <div style="padding-top:10px"></div>
             <div class="form-group">
@@ -34,10 +30,12 @@
         </form>
     </div>
 </div>
-</div>
-</div>
-</div>
 
+            <div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

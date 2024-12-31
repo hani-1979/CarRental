@@ -4,7 +4,7 @@ namespace CarRentalApp.Services
 {
     public interface IClassificationService
     {
-        Task<IEnumerable<Classification>> GetAllModeelsAsync();
+        Task<IEnumerable<Classification>> GetAllClassificationAsync();
         Task<Classification> GetClassificationByIdAsync(int id);
         Task AddClassificationAsync(Classification classification);
         Task UpdateClassificationAsync(Classification classification);

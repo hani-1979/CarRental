@@ -45,7 +45,7 @@ namespace CarRentalApp.ViewModels
         [ValidateNever]
         public List<Branch> branches { get; set; }
         
-        [DisplayName("إسم المصنع")]
+        [DisplayName("إسم الشركة المصنعة")]
         public int ManufactorerId { get; set; }
         [ValidateNever]
         public List<Manufactorer> manufactorers { get; set; }

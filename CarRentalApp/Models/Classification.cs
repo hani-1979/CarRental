@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 
 namespace CarRentalApp.Models
 {
@@ -6,6 +7,7 @@ namespace CarRentalApp.Models
     {
        
         public int classificationId { get; set; }
+        [DisplayName("إسم التصنيف")]
         public string classificationName { get; set; }
        
     }

@@ -33,7 +33,6 @@ namespace CarRentalApp.Controllers
       
         public async Task<IActionResult> Index()
         {
-
             var model = await _carService.GetAllCarsAsync();
             return View(model);
         }
@@ -45,7 +44,7 @@ namespace CarRentalApp.Controllers
                 branches = (List<Branch>) await _branchService.GetAllBranchesAsync(),
                 manufactorers=(List<Manufactorer>) await _manufactorerservice.GetAllManufactorerAsync(),
                 modeels = (List<Modeel>)await _modeelService.GetAllModeelsAsync(),
-                classifications=(List<Classification>) await _classificationService.GetAllModeelsAsync(),
+                classifications=(List<Classification>) await _classificationService.GetAllClassificationAsync(),
                 colours = (List<Colour>) await _colourService.GetAllColourAsync()
             };
             return View(model);

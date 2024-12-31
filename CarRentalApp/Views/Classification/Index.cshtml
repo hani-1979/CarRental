@@ -1,15 +1,11 @@
-﻿@model IEnumerable<CarRentalApp.Models.Branch>
-
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@model IEnumerable<CarRentalApp.Models.Classification>
 
 <div style="padding-top:80px"></div>
 <div class="container">
     <div class="col-lg-10 col-lg-offset-2">
         <div class="row">
             <div class="col-sm-2">
-                <a asp-action="Create" class="btn btn-success">إضافة فرع</a>
+                <a asp-action="Create" class="btn btn-success">إضافة لون </a>
             </div>
             <div class="col-lg-2"></div>
             <div class="col-lg-2"></div>
@@ -26,19 +22,11 @@
             </div>
         </div>
         <div style="padding-top:10px"></div>
-
-
         <table class="table table-hover" id="myTable">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BranchId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BranchNameAr)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.branchnameEn)
+                @Html.DisplayNameFor(model => model.classificationName)
             </th>
             <th></th>
         </tr>
@@ -47,20 +35,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.BranchId)
+                @Html.DisplayFor(modelItem => item.classificationName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BranchNameAr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.branchnameEn)
-            </td>
-            <td>
-                            <a asp-action="Edit" asp-route-id="@item.BranchId"><i class="bi bi-pencil"></i></a> |
-                            <a asp-action="Details" asp-route-id="@item.BranchId"><i class="bi bi-eye"></i></a> |
-                            <a asp-action="Delete" asp-route-id="@item.BranchId"><i class="bi bi-archive"></i></a>
+                            <a asp-action="Edit" asp-route-id="@item.classificationId"><i class="bi bi-pencil"></i></a> |
+                            <a asp-action="Details" asp-route-id="@item.classificationId"><i class="bi bi-eye"></i></a> |
+                            <a asp-action="Delete" asp-route-id="@item.classificationId"><i class="bi bi-archive"></i></a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>
+</div>

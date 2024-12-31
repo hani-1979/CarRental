@@ -18,7 +18,7 @@ namespace CarRentalApp.ViewModels
         public Company company  { get; set; }
         public int CarId { get; set; }
         public string PolicyNumber { get; set; }
-        public DateOnly BDPolicyNumber { get; set; }
+        public DateTime BDPolicyNumber { get; set; }
         public DateTime EDPolicyNumber { get; set; }
         [ValidateNever]
         public IFormFile Photo { get; set; }

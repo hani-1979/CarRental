@@ -14,7 +14,7 @@ namespace CarRentalApp.Models
         public Company Company { get; set; }
         public int CarId { get; set; }
         public string PolicyNumber { get; set; }
-        public DateOnly BDPolicyNumber { get; set; }
+        public DateTime BDPolicyNumber { get; set; }
         public DateTime EDPolicyNumber { get; set; }
         public string? Comment { get; set; }
 

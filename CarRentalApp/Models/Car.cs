@@ -23,17 +23,17 @@ namespace CarRentalApp.Models
         [ValidateNever]
         public Classification? Classification { get; set; }     
         public string? ChassisNumber { get; set; }
-        public  string? Yearfmanufacture { get; set; }
+        public DateTime? Yearfmanufacture { get; set; }
         public int ColourId { get; set; }
         [ValidateNever]
         public Colour? Colours { get; set; }
         public string? PlateNumber { get; set; }
          public string? FormNumber { get; set; }
-        public DateOnly? BDFormNumber { get; set; }
-        public DateOnly? EDFormNumber { get; set; }
+        public DateTime? BDFormNumber { get; set; }
+        public DateTime? EDFormNumber { get; set; }
         public string? CheckNumber { get; set; }
-        public DateOnly? BDCheckNumber { get; set; }
-        public DateOnly? EDCheckNumber { get; set; }
+        public DateTime? BDCheckNumber { get; set; }
+        public DateTime? EDCheckNumber { get; set; }
         public string? CartNumber { get; set; }
 
 

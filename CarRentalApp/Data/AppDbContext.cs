@@ -17,6 +17,8 @@ namespace CarRentalApp.Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<Insurance> Insurances { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
+        public DbSet<UserAccount> userAccounts { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -37,6 +39,7 @@ namespace CarRentalApp.Data
                  modelBuilder.Entity<InsuranceViewModel>().Ignore(i => i.Photo);
         }
         public DbSet<CarRentalApp.ViewModels.InsuranceViewModel> InsuranceViewModel { get; set; } = default!;
+        public DbSet<CarRentalApp.ViewModels.RegistrationViewModel> RegistrationViewModel { get; set; } = default!;
        
 
     }

@@ -34,7 +34,7 @@ namespace CarRentalApp.ViewModels
         [DisplayName("رقم الهيكل")]
         public string? ChassisNumber { get; set; }
         [DisplayName("سنة الصنع")]
-        public string? Yearfmanufacture { get; set; }
+        public DateTime? Yearfmanufacture { get; set; }
         [DisplayName("اللون")]
         public int ColourId { get; set; }
         [ValidateNever]
@@ -52,17 +52,17 @@ namespace CarRentalApp.ViewModels
         [ValidateNever]
         public List<Classification> classifications { get; set; }
         [DisplayName("رقم الإستمارة")]
-        public string? FormNumber { get; set; }
+        public DateTime? FormNumber { get; set; }
         [DisplayName("تأريخ بداية الإستمارة")]
-        public DateOnly? BDFormNumber { get; set; }
+        public DateTime? BDFormNumber { get; set; }
         [DisplayName("تأريخ إنتهاء الإستمارة")]
-        public DateOnly? EDFormNumber { get; set; }
+        public DateTime? EDFormNumber { get; set; }
         [DisplayName("رقم الفحص")]
         public string? CheckNumber { get; set; }
         [DisplayName("تأريخ بداية الفحص")]
-        public DateOnly? BDCheckNumber { get; set; }
+        public DateTime? BDCheckNumber { get; set; }
         [DisplayName("تأريخ نهاية الفحص")]
-        public DateOnly? EDCheckNumber { get; set; }
+        public DateTime? EDCheckNumber { get; set; }
         [DisplayName("رقم الكارت")]
         public string? CartNumber { get; set; }
 

@@ -2,8 +2,11 @@
 using CarRentalApp.Models;
 using CarRentalApp.Services;
 using CarRentalApp.ViewModels;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace CarRentalApp.Controllers
 {
@@ -50,7 +53,8 @@ namespace CarRentalApp.Controllers
                     };
 
                     await _context.AddAsync(userAccount);
-
+                    _context.SaveChanges();
+                    ModelState.Clear();
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -61,6 +65,38 @@ namespace CarRentalApp.Controllers
 
                 throw;
             }
+        }
+        [HttpGet]
+        public IActionResult Login()
+        { return View(); }
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _context.userAccounts.Where(x => (x.userId == model.userI || x.UserName == model.UserNameOrEmail || x.Email == model.UserNameOrEmail) && x.Password == model.Password).FirstOrDefault();
+                if (user != null)
+                {
+                    var claims = new List<Claim>
+                    {
+
+                        //new Claim(ClaimTypes.Name , user.Id),
+                        new Claim(ClaimTypes.Name,user.Email),
+                        new Claim("FirstName", user.UserName),
+                        new Claim(ClaimTypes.Role,"User")
+                    };
+                    var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimIdentity));
+                    return RedirectToAction("Index", "Home");
+                    //  return RedirectToAction("SecurePage");
+                }
+                else
+                {
+
+                    ModelState.AddModelError("", "UserName/Emai Or password Is Not Correct");
+                }
+            }
+            return View();
         }
     }
 }

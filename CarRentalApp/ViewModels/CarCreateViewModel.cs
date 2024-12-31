@@ -52,7 +52,7 @@ namespace CarRentalApp.ViewModels
         [ValidateNever]
         public List<Classification> classifications { get; set; }
         [DisplayName("رقم الإستمارة")]
-        public DateTime? FormNumber { get; set; }
+        public string? FormNumber { get; set; }
         [DisplayName("تأريخ بداية الإستمارة")]
         public DateTime? BDFormNumber { get; set; }
         [DisplayName("تأريخ إنتهاء الإستمارة")]

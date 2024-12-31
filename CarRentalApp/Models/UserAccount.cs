@@ -9,6 +9,7 @@ namespace CarRentalApp.Models
         [Key]
         public int userId { get; set; }
         [Required(ErrorMessage = "UserName Is Required")]
+        public string  Email { get; set; }
         public string UserName { get; set; }
         [Required(ErrorMessage = "Password Is Required")]
         public string Password { get; set; }

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<CarRentalApp.Models.Manufactorer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div style="padding-top:80px"></div>
+<div class="container">
+    <div class="col-lg-10 col-lg-offset-2">
+<div class="row">
+    <div class="col-sm-2">
+        <a asp-action="Create" class="btn btn-success">إضافة شركة</a>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
+    <div class="col-xs-6 col-md-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" id="myInput" onkeyup="myFunction()" />
+            <div class="input-group-btn">
+                <button class="btn btn-primary" type="submit">
+                    <span class="bi bi-search"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+        <div style="padding-top:10px"></div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ManufactorNameAr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ManufactorNameEn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManufactorNameAr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManufactorNameEn)
+            </td>
+            <td>
+                            <a asp-action="Edit" asp-route-id="@item.ManufactorerId"><i class="bi bi-pencil"></i></a> |
+                            <a asp-action="Details" asp-route-id="@item.ManufactorerId"><i class="bi bi-eye"></i></a> |
+                            <a asp-action="Delete" asp-route-id="@item.ManufactorerId"><i class="bi bi-archive"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+</div>

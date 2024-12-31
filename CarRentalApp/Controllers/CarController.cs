@@ -1,6 +1,7 @@
 ﻿using CarRentalApp.Models;
 using CarRentalApp.Services;
 using CarRentalApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
@@ -10,6 +11,7 @@ namespace CarRentalApp.Controllers
 {
     public class CarController : Controller
     {
+      
         private readonly ICarService _carService;
         private readonly IBranchService _branchService;
         private readonly IColourService _colourService;
@@ -28,8 +30,10 @@ namespace CarRentalApp.Controllers
             _classificationService = classificationService;
             _colourService = colourService;
         }
+      
         public async Task<IActionResult> Index()
         {
+
             var model = await _carService.GetAllCarsAsync();
             return View(model);
         }

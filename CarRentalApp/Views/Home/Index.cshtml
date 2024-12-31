@@ -28,60 +28,71 @@
     }
 </style>
 
-<div class="container-fluid" dir="ltr">
+<div class="container-fluid " dir="rtl">
     <div style="padding-top: 100px;"></div>
     <div class="col-lg-10 col-lg-offset-5">
-        <div class="row" img-container>
-            <div class="col-lg-4">
-                <a asp-controller="Cateogry" asp-action="Index">
-                    <img src="~/images/67362814.png" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px;align-content:center; color: #000000; ">  المهن </h4>
-                </a>
-
-            </div>
-
-            <div class="col-lg-4 center">
-                <a asp-controller="Worker" asp-action="Index">
-                    <img src="~/images/3773364.png" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px;align-content:center; color: #000000; ">  التسجيل </h4>
-                </a>
-
-            </div>
-            <div class="col-lg-4">
-                <a asp-controller="Acount" asp-action="Index">
-                    <img src="~/images/30764049.png" onended="false" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px; color: #000000; ">إدارة المستخدمين</h4>
-                </a>
-
-
-            </div>
-
-
-        </div>
-        <br />
-        <br />
+        
+        
         <div class="justify-content-center align-items-center">
-            <div class="row">
-                <div class="col-lg-4">
-                    <a asp-controller="Account" asp-action="Index">
-                        <img src="~/images/Custemor.jpg" width="150" class="listing-img" height="150" alt="" /><h4 style="font-family: Reem Kufi; font-size: 18px; color: #000000">  العملاء</h4>
+            <div class="row" img-container>
+                <div class="col-lg-3">
+                    <a asp-controller="Insurance" asp-action="Index">
+                        <img src="~/Icons/Insurance.png" width="150" class="listing-img" height="150" alt="" /><h4 style="font-family: Reem Kufi; font-size: 18px; color: #000000">  وثائق التأمين</h4>
                     </a>
                 </div>
 
-                <div class="col-lg-4">
-                    <a asp-controller="Country" asp-action="Index">
-                        <img src="~/images/38786282.png" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size: 18px; color: #000000;"> الدول</h4>
+                <div class="col-lg-3">
+                    <a asp-controller="Car" asp-action="Index">
+                        <img src="~/Icons/carregister.png" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size: 18px; color: #000000;"> التسجيل</h4>
                     </a>
                 </div>
-                <div class="col-lg-4 center">
-                    <img src="~/images/Report.png" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px; color: #000000; "> التقارير </h4>
-
+                <div class="col-lg-3">
+                     <a asp-controller="Account" asp-action="Index">
+                    <img src="~/Icons/Users.png" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px; color: #000000; "> المستخدمين </h4>
+                    </a>
 
                 </div>
+                <div class="col-lg-3">
+                    <a asp-controller="Branch" asp-action="Index">
+                        <img src="~/Icons/Branch.png" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px;align-content:center; color: #000000; ">  فروع البشركة </h4>
+                    </a>
+
+                </div>
+
             </div>
         </div>
+   
+    <br />
+    <br />
+    <div class="row" img-container>
+
+            <div class="col-lg-3">
+                <a asp-controller="Insurance" asp-action="Index">
+                    <img src="~/Icons/class.png" width="150" class="listing-img" height="150" alt="" /><h4 style="font-family: Reem Kufi; font-size: 18px; color: #000000">  تصنيف السيارات</h4>
+                </a>
+            </div>
+       
+        <div class="col-lg-3">
+            <a asp-controller="Insurance" asp-action="Index">
+                <img src="~/Icons/Color.png" width="150" class="listing-img" height="150" alt="" /><h4 style="font-family: Reem Kufi; font-size: 18px; color: #000000">  الوان السيارات </h4>
+            </a>
+        </div>
+        <div class="col-lg-3">
+            <a asp-controller="Modeel" asp-action="Index">
+                <img src="~/Icons/Model.png" onended="false" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px; color: #000000; "> السيارات </h4>
+            </a>
+
+
+        </div>
+        <div class="col-lg-3 center">
+                <a asp-controller="Manufactorer" asp-action="Index">
+                <img src="~/Icons/manufacturer.png" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px;align-content:center; color: #000000; ">  الشركات المصنعة </h4>
+            </a>
+
+        </div>
+
     </div>
-    <br />
-    <br />
 
-
-
+    </div>
 </div>
 

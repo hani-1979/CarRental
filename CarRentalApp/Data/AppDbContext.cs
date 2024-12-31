@@ -40,6 +40,7 @@ namespace CarRentalApp.Data
         }
         public DbSet<CarRentalApp.ViewModels.InsuranceViewModel> InsuranceViewModel { get; set; } = default!;
         public DbSet<CarRentalApp.ViewModels.RegistrationViewModel> RegistrationViewModel { get; set; } = default!;
+        public DbSet<CarRentalApp.ViewModels.ManufaCarViewModel> ManufaCarViewModel { get; set; } = default!;
        
 
     }

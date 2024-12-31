@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    img {
+        border: 0px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+        width: 150px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+    }
+
+        img:hover {
+            box-shadow: 0 0 2px 1px rgb(4, 1, 3);
+        }
+</style>
+<style>
+    .container {
+        text-align: center; /* لتوسيط النص أفقيًا */
+    }
+
+    img {
+        display: block;
+        margin: 0 auto; /* لتوسيط الصورة */
+    }
+</style>
+
+<div class="container-fluid" dir="ltr">
+    <div style="padding-top: 100px;"></div>
+    <div class="col-lg-10 col-lg-offset-5">
+        <div class="row" img-container>
+            <div class="col-lg-4">
+                <a asp-controller="Cateogry" asp-action="Index">
+                    <img src="~/images/67362814.png" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px;align-content:center; color: #000000; ">  المهن </h4>
+                </a>
+
+            </div>
+
+            <div class="col-lg-4 center">
+                <a asp-controller="Worker" asp-action="Index">
+                    <img src="~/images/3773364.png" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px;align-content:center; color: #000000; ">  التسجيل </h4>
+                </a>
+
+            </div>
+            <div class="col-lg-4">
+                <a asp-controller="Acount" asp-action="Index">
+                    <img src="~/images/30764049.png" onended="false" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px; color: #000000; ">إدارة المستخدمين</h4>
+                </a>
+
+
+            </div>
+
+
+        </div>
+        <br />
+        <br />
+        <div class="justify-content-center align-items-center">
+            <div class="row">
+                <div class="col-lg-4">
+                    <a asp-controller="Account" asp-action="Index">
+                        <img src="~/images/Custemor.jpg" width="150" class="listing-img" height="150" alt="" /><h4 style="font-family: Reem Kufi; font-size: 18px; color: #000000">  العملاء</h4>
+                    </a>
+                </div>
+
+                <div class="col-lg-4">
+                    <a asp-controller="Country" asp-action="Index">
+                        <img src="~/images/38786282.png" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size: 18px; color: #000000;"> الدول</h4>
+                    </a>
+                </div>
+                <div class="col-lg-4 center">
+                    <img src="~/images/Report.png" runat="server" width="150" height="150" alt="" /><h4 style="font-family: Reem Kufi;  font-size:18px; color: #000000; "> التقارير </h4>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+
+
+
+</div>
+

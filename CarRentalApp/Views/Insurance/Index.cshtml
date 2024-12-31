@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CarRentalApp.Models.Insurance>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+   
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.PolicyNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BDPolicyNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EDPolicyNumber)
+            </th>
+           
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.CompanyId)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.PolicyNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BDPolicyNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EDPolicyNumber)
+            </td>
+           
+            <td>
+                <a asp-action="DownloadAttachments" asp-route-id="@item.InsuranceId"><i class="bi bi-download"></i></a> |
+                <a asp-action="Details" asp-route-id="@item.InsuranceId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.InsuranceId">Delete</a>
+
+                <td>
+                    <!-- Apply the class based on date comparison -->
+                    <button class="btn @(item.EDPolicyNumber < DateTime.Now ? "btn-danger" : "btn-success")">
+                            @(item.EDPolicyNumber < DateTime.Now ? "Expired" : "Active")
+                    </button>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

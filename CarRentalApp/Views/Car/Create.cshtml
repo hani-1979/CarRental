@@ -1,0 +1,149 @@
+﻿@model CarRentalApp.ViewModels.CarCreateViewModel
+
+
+
+<h1>إضافة سيارة</h1>
+
+
+<div style="padding-top:45px"></div>
+<form asp-action="Create">
+   
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                    <label asp-for="BranchId" class="control-label"></label>
+                    <select asp-for="BranchId" class="form-control" asp-items="@(new SelectList(Model.branches,"BranchId","BranchNameAr"))"></select>
+               
+            </div>
+            </div>
+            <div class="col-md-3">
+            <div class="form-group">
+                    <label asp-for="ColourId" class="control-label"></label>
+                    <select asp-for="ColourId" class="form-control" asp-items="@(new SelectList(Model.colours,"ColourId","ColourNameAr"))"></select>
+                    <span asp-validation-for="ColourId" class="text-danger"></span>
+            </div>
+            </div>
+           
+            </div>
+            <div class="row">
+            <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="ManufactorerId" id="ManufactorerId" class="control-label"></label>
+                <select asp-for="ManufactorerId" class="form-control" asp-items="@(new SelectList(Model.manufactorers,"ManufactorerId","ManufactorNameAr"))"></select>
+            </div>
+                </div>
+            <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="ModeelId" class="control-label"></label>
+                <select asp-for="ModeelId" class="form-control" asp-items="@(new SelectList(Model.modeels,"ModeelId","ModeelNameAr"))"></select>
+            </div>
+            </div>
+            <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="classificationId" class="control-label"></label>
+                <select asp-for="classificationId" class="form-control" asp-items="@(new SelectList(Model.classifications,"classificationId","classificationName"))"></select>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="ChassisNumber" class="control-label"></label>
+                <input asp-for="ChassisNumber" class="form-control" />
+                <span asp-validation-for="ChassisNumber" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="Yearfmanufacture" class="control-label"></label>
+                <input asp-for="Yearfmanufacture" class="form-control" />
+                <span asp-validation-for="Yearfmanufacture" class="text-danger"></span>
+            </div>
+            </div>
+           
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="PlateNumber" class="control-label"></label>
+                <input asp-for="PlateNumber" class="form-control" />
+                <span asp-validation-for="PlateNumber" class="text-danger"></span>
+            </div>
+        </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="CartNumber" class="control-label"></label>
+                    <input asp-for="CartNumber" class="form-control" />
+                    <span asp-validation-for="CartNumber" class="text-danger"></span>
+                </div>
+            </div>
+        <br />
+        </div>
+         <div class="row">
+            <div class="col-md-3">
+            <div class="form-group">
+                    <label asp-for="FormNumber" class="control-label"></label>
+                    <input asp-for="FormNumber" class="form-control" />
+                    <span asp-validation-for="FormNumber" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="col-md-3">
+            <div class="form-group">
+                    <label asp-for="BDFormNumber" class="control-label"></label>
+                    <input asp-for="BDFormNumber" class="form-control" placeholder="MM/DD/YYYY" />
+                    <span asp-validation-for="BDFormNumber" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="EDFormNumber" class="control-label"></label>
+                    <input asp-for="EDFormNumber" class="form-control" placeholder="MM/DD/YYYY" />
+                    <span asp-validation-for="EDFormNumber" class="text-danger"></span>
+                </div>
+            </div>
+           
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="CheckNumber" class="control-label"></label>
+                    <input asp-for="CheckNumber" class="form-control" />
+                    <span asp-validation-for="CheckNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="BDCheckNumber" class="control-label"></label>
+                    <input asp-for="BDCheckNumber" class="form-control" />
+                    <span asp-validation-for="BDCheckNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="EDCheckNumber" class="control-label"></label>
+                    <input asp-for="EDCheckNumber" class="form-control" />
+                    <span asp-validation-for="EDCheckNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div style="padding-top:10px"></div>
+
+        </div>
+
+            <div class="form-group">
+                <input type="submit" value="إضافة" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-warning">عودة إلي السابق</a>
+            </div>
+            </div>
+</form>
+
+<div>
+    
+   
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

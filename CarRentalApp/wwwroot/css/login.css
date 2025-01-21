@@ -11,6 +11,7 @@
     background-size: cover; /* Makes sure the image covers the full screen */
     background-position: center; /* Centers the image */
     height: 100vh; /* Full viewport height */
+    width:1550px;
     background-attachment: fixed; /* Makes the background fixed when scrolling */
     display: flex;
     justify-content: center; /* Centers the content horizontally */

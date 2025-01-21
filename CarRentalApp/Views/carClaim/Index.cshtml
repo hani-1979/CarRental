@@ -1,0 +1,163 @@
+﻿@model IEnumerable<CarRentalApp.ViewModels.AccidentClaimViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div style="padding-top:80px"></div>
+<div class="container">
+   
+        <div class="row">
+
+            <div class="col-sm-2">
+                <h5 style="color: red;">متابعة المطابات :</h5>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-xs-6 col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="بحث" id="myInput" onkeyup="myFunction()" />
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">
+                            <span class="bi bi-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding-top:10px"></div>
+
+        <table class="table table-hover" id="myTable">
+                <thead>
+                    <tr>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompanyNameAr)
+                        </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccidentNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.carClaimNumber)
+                </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PlateNumber)
+                        </th>
+
+
+                                            <th>
+                        @Html.DisplayNameFor(model => model.DriverName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DriverIdentity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DriveLicence)
+                    </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ClaimAmount)
+                        </th>
+                       
+                    <th>
+                        @Html.DisplayNameFor(model => model.EstimationNumber)
+                    </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Percentage)
+                </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompanyNameAr)
+                            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccidentNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.carClaimNumber)
+                    </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PlateNumber)
+                            </td>
+
+                           
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DriverName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DriverIdentity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DriveLicence)
+                        </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClaimAmount)
+                            </td>
+                            
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EstimationNumber)
+
+                        </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Percentage)
+
+                    </td>
+                       
+                       
+
+                            <td>
+                        <a style="padding: 15px" asp-action="DownloadAttachments" asp-route-id="@item.carClaimId"><i class="bi bi-download"></i></a> |
+                        <a class="bi bi-pencil" href="@Url.Action("ChangeStatus", "carClaim", new { carClaimId = item.carClaimId })">
+                               
+                            </a> |
+                        <a asp-controller="Pdf" asp-action="GeneratePdf" asp-route-id="@item.carClaimId"><i class="bi bi-eye "></i></a> |
+                        
+                                @{
+                                    string btnClass = "";
+                                    string btnText = "";
+                            if (item.StatusCode == 0)
+                                    {
+                                        btnClass = "btn-danger"; // Danger (Red)
+                                        btnText = "قيد الإجراء";
+                                    }
+
+                            else if (item.StatusCode == 2)
+                                    {
+                                    btnClass = "btn-warning"; // Success (Green)
+                                    btnText = "نقص المستندات";
+                                    }
+                            else if (item.StatusCode == 3)
+                                {
+                                    btnClass = "btn-success"; // Success (Green)
+                                    btnText = "المطالبة مدفوعة";
+                                }
+                            else if (item.StatusCode == 4)
+                                {
+                                    btnClass = "btn-danger"; // Success (Green)
+                                    btnText = "المطالبة مرفوضة";
+                                }
+                                    else
+                                    {
+                                        btnClass = "btn-secondary"; // Default button class (optional)
+
+                                    }
+                                }
+
+                                <button class="btn @btnClass ">@btnText</button>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    
+    @section scripts {
+        <script src="~/js/search.js"></script>
+
+    }

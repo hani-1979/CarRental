@@ -20,16 +20,28 @@ namespace CarRentalApp.Controllers
             _context = context;
             _branchService = branchService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = _context.userAccounts
+              .Join(_context.Branches, // Assuming there's a Manufacturers table in your database
+                    user => user.BranchId, // Foreign key on Modeel (Car) to Manufacturer
+                    Branch => Branch.BranchId, // Primary key of Manufacturer
+                    (user, Branch) => new RegistrationViewModel
+                    {
+                        BranchNameAr = Branch.BranchNameAr,
+                        UserName = user.UserName,
+                        Email = user.Email // Assuming the Manufacturer model has a 'Name' property
+                        
+                    })
+              .ToList();
+            return View(user);
         }
         [HttpGet]
         public async Task<IActionResult> Registration()
         {
             var model = new RegistrationViewModel
             {
-                branches = (List<Branch>)await _branchService.GetAllBranchesAsync(),
+                branches = (List<Branch>) await _branchService.GetAllBranchesAsync(),
             };
             return View(model);
         }
@@ -46,6 +58,7 @@ namespace CarRentalApp.Controllers
                     {
 
                         Branch = await _branchService.GetBranchByIdAsync((int)model.BranchId),
+                        Email=model.Email,
                         UserName = model.UserName,
                         Password = model.Password,
                         IsAdmin = model.IsAdmin,
@@ -93,10 +106,15 @@ namespace CarRentalApp.Controllers
                 else
                 {
 
-                    ModelState.AddModelError("", "UserName/Emai Or password Is Not Correct");
+                    ModelState.AddModelError("", "إسم المستخدم أو كلمة المرور غير صحيحة");
                 }
             }
             return View();
+        }
+        public IActionResult LogOut()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Account");
         }
     }
 }

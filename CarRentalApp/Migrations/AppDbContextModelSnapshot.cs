@@ -22,6 +22,135 @@ namespace CarRentalApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CarRentalApp.Models.Accident", b =>
+                {
+                    b.Property<int>("AccidentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccidentId"));
+
+                    b.Property<DateTime>("AccidentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("AccidentNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AccidentStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DriveLicence")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DriveLicenceOther")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DriverCompanyOther")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DriverIdentity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DriverIdentityOther")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DriverName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DriverNameOther")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Percentage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TrafficreportId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AccidentId");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("TrafficreportId");
+
+                    b.ToTable("Accidents");
+                });
+
+            modelBuilder.Entity("CarRentalApp.Models.AccidentAttachment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccidentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccidentId");
+
+                    b.ToTable("accidentAttachments");
+                });
+
+            modelBuilder.Entity("CarRentalApp.Models.AccidentPicAttachment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccidentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccidentId");
+
+                    b.ToTable("accidentPicAttachments");
+                });
+
             modelBuilder.Entity("CarRentalApp.Models.Attachment", b =>
                 {
                     b.Property<int>("Id")
@@ -81,6 +210,9 @@ namespace CarRentalApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarId"));
 
+                    b.Property<int>("AccidenStatus")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("BDCheckNumber")
                         .HasColumnType("datetime2");
 
@@ -89,9 +221,6 @@ namespace CarRentalApp.Migrations
 
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
-
-                    b.Property<string>("CarName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CartNumber")
                         .HasColumnType("nvarchar(max)");
@@ -102,8 +231,14 @@ namespace CarRentalApp.Migrations
                     b.Property<string>("CheckNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ClaimStatus")
+                        .HasColumnType("int");
+
                     b.Property<int>("ColourId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("EDCartNumber")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("EDCheckNumber")
                         .HasColumnType("datetime2");
@@ -114,6 +249,9 @@ namespace CarRentalApp.Migrations
                     b.Property<string>("FormNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("InsuraceStatus")
+                        .HasColumnType("int");
+
                     b.Property<int>("ManufactorerId")
                         .HasColumnType("int");
 
@@ -121,6 +259,7 @@ namespace CarRentalApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PlateNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("Yearfmanufacture")
@@ -142,6 +281,62 @@ namespace CarRentalApp.Migrations
                     b.HasIndex("classificationId");
 
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("CarRentalApp.Models.ClaimAttachment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("carClaimId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("carClaimId");
+
+                    b.ToTable("ClaimAttachments");
+                });
+
+            modelBuilder.Entity("CarRentalApp.Models.ClaimStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusCode")
+                        .HasColumnType("int");
+
+                    b.Property<int>("carClaimId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("carClaimId")
+                        .IsUnique();
+
+                    b.ToTable("ClaimStatuses");
                 });
 
             modelBuilder.Entity("CarRentalApp.Models.Classification", b =>
@@ -199,6 +394,38 @@ namespace CarRentalApp.Migrations
                     b.HasKey("CompanyId");
 
                     b.ToTable("Companys");
+                });
+
+            modelBuilder.Entity("CarRentalApp.Models.Estimation", b =>
+                {
+                    b.Property<int>("EstimationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EstimationId"));
+
+                    b.Property<int>("AccidentId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("EstimationAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("EstimationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EstimationNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EstimationSide")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EstimationId");
+
+                    b.HasIndex("AccidentId");
+
+                    b.ToTable("Estimations");
                 });
 
             modelBuilder.Entity("CarRentalApp.Models.Insurance", b =>
@@ -281,6 +508,22 @@ namespace CarRentalApp.Migrations
                     b.ToTable("Modeels");
                 });
 
+            modelBuilder.Entity("CarRentalApp.Models.Trafficreport", b =>
+                {
+                    b.Property<int>("TrafficreportId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TrafficreportId"));
+
+                    b.Property<string>("TrafficreportName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TrafficreportId");
+
+                    b.ToTable("Trafficreports");
+                });
+
             modelBuilder.Entity("CarRentalApp.Models.UserAccount", b =>
                 {
                     b.Property<int>("userId")
@@ -291,6 +534,10 @@ namespace CarRentalApp.Migrations
 
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
@@ -310,63 +557,98 @@ namespace CarRentalApp.Migrations
                     b.ToTable("userAccounts");
                 });
 
-            modelBuilder.Entity("CarRentalApp.ViewModels.InsuranceViewModel", b =>
+            modelBuilder.Entity("CarRentalApp.Models.carClaim", b =>
                 {
-                    b.Property<DateTime>("BDPolicyNumber")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("carClaimId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("carClaimId"));
+
+                    b.Property<int>("AccidentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ClaimAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("ClaimDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ClaimStatus")
                         .HasColumnType("int");
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("EDPolicyNumber")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("InsuranceId")
+                    b.Property<int>("EstimationId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PolicyNumber")
+                    b.Property<string>("carClaimNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("carClaimId");
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("InsuranceViewModel");
+                    b.HasIndex("EstimationId");
+
+                    b.ToTable("carClaim");
                 });
 
-            modelBuilder.Entity("CarRentalApp.ViewModels.RegistrationViewModel", b =>
+            modelBuilder.Entity("CarRentalApp.Models.Accident", b =>
                 {
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("int");
+                    b.HasOne("CarRentalApp.Models.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("ConfirmPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasOne("CarRentalApp.Models.Company", "company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasOne("CarRentalApp.Models.Trafficreport", "Trafficreport")
+                        .WithMany()
+                        .HasForeignKey("TrafficreportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
+                    b.Navigation("Branch");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Navigation("Trafficreport");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Navigation("company");
+                });
 
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
+            modelBuilder.Entity("CarRentalApp.Models.AccidentAttachment", b =>
+                {
+                    b.HasOne("CarRentalApp.Models.Accident", "Accident")
+                        .WithMany("accidentAttachment")
+                        .HasForeignKey("AccidentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasIndex("BranchId");
+                    b.Navigation("Accident");
+                });
 
-                    b.ToTable("RegistrationViewModel");
+            modelBuilder.Entity("CarRentalApp.Models.AccidentPicAttachment", b =>
+                {
+                    b.HasOne("CarRentalApp.Models.Accident", "Accident")
+                        .WithMany()
+                        .HasForeignKey("AccidentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Accident");
                 });
 
             modelBuilder.Entity("CarRentalApp.Models.Attachment", b =>
@@ -423,6 +705,37 @@ namespace CarRentalApp.Migrations
                     b.Navigation("Modeel");
                 });
 
+            modelBuilder.Entity("CarRentalApp.Models.ClaimAttachment", b =>
+                {
+                    b.HasOne("CarRentalApp.Models.carClaim", "carClaim")
+                        .WithMany("ClaimAttachments")
+                        .HasForeignKey("carClaimId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("carClaim");
+                });
+
+            modelBuilder.Entity("CarRentalApp.Models.ClaimStatus", b =>
+                {
+                    b.HasOne("CarRentalApp.Models.carClaim", null)
+                        .WithOne("claimStatus")
+                        .HasForeignKey("CarRentalApp.Models.ClaimStatus", "carClaimId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CarRentalApp.Models.Estimation", b =>
+                {
+                    b.HasOne("CarRentalApp.Models.Accident", "Accident")
+                        .WithMany()
+                        .HasForeignKey("AccidentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Accident");
+                });
+
             modelBuilder.Entity("CarRentalApp.Models.Insurance", b =>
                 {
                     b.HasOne("CarRentalApp.Models.Company", "Company")
@@ -456,7 +769,7 @@ namespace CarRentalApp.Migrations
                     b.Navigation("Branch");
                 });
 
-            modelBuilder.Entity("CarRentalApp.ViewModels.InsuranceViewModel", b =>
+            modelBuilder.Entity("CarRentalApp.Models.carClaim", b =>
                 {
                     b.HasOne("CarRentalApp.Models.Company", "company")
                         .WithMany()
@@ -464,21 +777,30 @@ namespace CarRentalApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CarRentalApp.Models.Estimation", "Estimation")
+                        .WithMany("carClaims")
+                        .HasForeignKey("EstimationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Estimation");
+
                     b.Navigation("company");
                 });
 
-            modelBuilder.Entity("CarRentalApp.ViewModels.RegistrationViewModel", b =>
+            modelBuilder.Entity("CarRentalApp.Models.Accident", b =>
                 {
-                    b.HasOne("CarRentalApp.Models.Branch", "Branch")
-                        .WithMany()
-                        .HasForeignKey("BranchId");
-
-                    b.Navigation("Branch");
+                    b.Navigation("accidentAttachment");
                 });
 
             modelBuilder.Entity("CarRentalApp.Models.Branch", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("CarRentalApp.Models.Estimation", b =>
+                {
+                    b.Navigation("carClaims");
                 });
 
             modelBuilder.Entity("CarRentalApp.Models.Insurance", b =>
@@ -494,6 +816,14 @@ namespace CarRentalApp.Migrations
             modelBuilder.Entity("CarRentalApp.Models.Modeel", b =>
                 {
                     b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("CarRentalApp.Models.carClaim", b =>
+                {
+                    b.Navigation("ClaimAttachments");
+
+                    b.Navigation("claimStatus")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,12 @@
+﻿@model CarRentalApp.Models.Accident
+
+<h2>Record Details</h2>
+<div style="padding-top:100px"></div>
+<form asp-action="UpdateStatus" method="post">
+    <input hidden asp-for="AccidentId" />
+   @*  <input type="hidden" name="id" value="@Model.AccidentId" /> *@
+    <label for="statusCheckbox">Change Status:</label>
+    <input type="checkbox" id="statusCheckbox" name="isChecked"
+           value="true" @(Model.AccidentStatus == 2 ? "checked" : "") />
+    <button type="submit">Update Status</button>
+</form>

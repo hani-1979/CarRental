@@ -1,22 +1,42 @@
-﻿@model IEnumerable<CarRentalApp.Models.Insurance>
+﻿@model IEnumerable<CarRentalApp.ViewModels.InsuranceViewModel>
 
-
+<link href="~/css/table.css" rel="stylesheet" />
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
+<div style="padding-top:80px"></div>
+<div class="container">
    
-</p>
-<table class="table">
+        <div class="row">
+            <div class="col-sm-2">
+                <h5 style="color: red;">متابعة التأمين :</h5>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-xs-6 col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="بحث" id="myInput" onkeyup="myFunction()" />
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">
+                            <span class="bi bi-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding-top:10px"></div>
+
+        <table class="table" id="myTable">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Company)
+                @Html.DisplayNameFor(model => model.CompanyNameAr)
             </th>
-           
+                    <th>
+                        @Html.DisplayNameFor(model => model.PlateNumber)
+                    </th>
             <th>
                 @Html.DisplayNameFor(model => model.PolicyNumber)
             </th>
@@ -34,29 +54,36 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+           
             <td>
-                @Html.DisplayFor(modelItem => item.Company.CompanyId)
+                @Html.DisplayFor(modelItem => item.CompanyNameAr)
             </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlateNumber)
+                        </td>
            
             <td>
                 @Html.DisplayFor(modelItem => item.PolicyNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BDPolicyNumber)
+                            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.BDPolicyNumber))
+               
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EDPolicyNumber)
+                            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.EDPolicyNumber))
             </td>
            
             <td>
-                <a asp-action="DownloadAttachments" asp-route-id="@item.InsuranceId"><i class="bi bi-download"></i></a> |
-                <a asp-action="Details" asp-route-id="@item.InsuranceId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.InsuranceId">Delete</a>
+                       
+                            <a asp-action="DownloadAttachments" asp-route-id="@item.InsuranceId"><i class="bi bi-download"></i></a> |
+
+                            <a asp-action="Details" asp-route-id="@item.InsuranceId"><i class="bi bi-eye"></i></a> |
+                
 
                 <td>
                     <!-- Apply the class based on date comparison -->
                     <button class="btn @(item.EDPolicyNumber < DateTime.Now ? "btn-danger" : "btn-success")">
-                            @(item.EDPolicyNumber < DateTime.Now ? "Expired" : "Active")
+                            @(item.EDPolicyNumber < DateTime.Now ? "الوثيقة منتهية" : "الوثيقة سارية")
                     </button>
                 
             </td>
@@ -64,3 +91,8 @@
 }
     </tbody>
 </table>
+</div>
+    @section scripts {
+        <script src="~/js/search.js"></script>
+    }
+

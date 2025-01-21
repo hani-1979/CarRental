@@ -2,10 +2,10 @@ using CarRentalApp.Data;
 using CarRentalApp.Models;
 using CarRentalApp.Repositories;
 using CarRentalApp.Services;
+
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +22,10 @@ builder.Services.AddScoped(typeof(IRepository<Classification>), typeof(Classific
 builder.Services.AddScoped(typeof(IRepository<Company>), typeof(CompanyRepository<Company>));
 builder.Services.AddScoped(typeof(IRepository<Car>), typeof(CarRepository<Car>));
 builder.Services.AddScoped(typeof(IRepository<Insurance>), typeof(InsuranceRepository<Insurance>));
+builder.Services.AddScoped(typeof(IRepository<Accident>), typeof(AccidentRepository<Accident>));
+builder.Services.AddScoped(typeof(IRepository<carClaim>),typeof(carClaimRepository<carClaim>));
+builder.Services.AddScoped(typeof(IRepository<Estimation>), typeof(EstimationRepsitory<Estimation>));
+
 
 
 builder.Services.AddScoped<ICarService, CarService>();
@@ -32,7 +36,11 @@ builder.Services.AddScoped<IClassificationService, ClassificationService>();
 builder.Services.AddScoped<IColourService, ColourService>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<IInsuranceService, InsuranceService>();
-
+builder.Services.AddScoped<IAccidentService, AccidentService>();
+builder.Services.AddScoped<ICarClaimService, CarClaimService>();
+builder.Services.AddScoped<IUpdateStatusService, UpdateStatusService>();
+builder.Services.AddScoped<IEstimationService ,EstimationService>();
+builder.Services.AddSingleton<PdfService>();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>(Options =>
@@ -54,14 +62,14 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseStaticFiles();
 app.UseAuthorization();
 
 app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=account}/{action=Login}/{id?}")
     .WithStaticAssets();
 
 

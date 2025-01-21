@@ -1,0 +1,162 @@
+﻿@model IEnumerable<CarRentalApp.ViewModels.AccidentCarViewModel>
+
+   
+    <style >
+    .disabled-link {
+        color: gray; /* تغيير اللون ليظهر أنه غير نشط */
+        pointer-events: none; /* تعطيل التفاعل مع الرابط */
+        text-decoration: none; /* إزالة التسطير */
+    }
+</style>
+    
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div style="padding-top:80px"></div>
+<div class="container">
+   
+        <div class="row">
+
+            <div class="col-sm-2">
+                <h5 style="color: red;">متابعة الحوادث :</h5>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-xs-6 col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="بحث" id="myInput" onkeyup="myFunction()" />
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">
+                            <span class="bi bi-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding-top:10px"></div>
+
+        <table class="table table-hover" id="myTable">
+    <thead>
+        <tr>
+                   
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyNameAr)
+            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccidentNumber)
+                </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DriverName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DriverIdentity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DriveLicence)
+                    </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlateNumber)
+            </th>
+           
+           
+            <th>
+                @Html.DisplayNameFor(model => model.ChassisNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccidentDate)
+            </th>
+                
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                       
+           
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyNameAr)
+                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccidentNumber)
+                    </td>
+                 <td>
+                            @Html.DisplayFor(modelItem => item.DriverName)
+                </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DriverIdentity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DriveLicence)
+                        </td>
+            
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlateNumber)
+                </td>
+          
+           
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChassisNumber)
+                </td>
+                <td>
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.AccidentDate))
+                   
+                </td>
+            
+            <td>
+                        <a asp-action="GetImagesById" asp-route-id="@item.AccidentId"><i class="bi bi-file-earmark-image"></i></a> |
+                        <a asp-action="DownloadAttachments" title="Download Attachments" asp-route-id="@item.AccidentId"><i class="bi bi-download"></i></a> |
+                        <a asp-controller="Estimation" title="Download Attachments" asp-action="Create" asp-route-id="@item.AccidentId"><i class="bi bi-pencil"></i></a> |
+                            @{
+                                if(item.AccidentStatus==2){
+                                    <a asp-controller="carClaim" class="disabled-link" asp-action="Create" asp-route-id="@item.AccidentId"><i class="bi bi-hospital text-bg-danger"></i></a>
+                                }
+                                else{
+                                    <a asp-controller="carClaim"  asp-action="Create" asp-route-id="@item.AccidentId"><i class="bi bi-hospital text-bg-danger"></i></a>
+                                }
+                               
+                            }
+                           
+                           
+                            @{
+                                string btnClass = "";
+                                string btnText = "";
+                                if (item.AccidentStatus == 1)
+                                {
+                                    btnClass = "btn-danger"  ; // Danger (Red)
+                                    btnText = "قيد الإجراء";
+                                }
+                                else if (item.AccidentStatus == 2)
+                                {
+                                    btnClass = "btn-warning"; // Warning (Orange)
+                                    btnText = "قيد التقدير";
+                                }
+                                else if (item.AccidentStatus == 3)
+                                {
+                                    btnClass = "btn-info"; // Success (Green)
+                                    btnText = "قيد الإنتظار";
+                                }
+                            else if (item.AccidentStatus == 4)
+                            {
+                                btnClass = "btn-success"; // Success (Green)
+                                btnText = "المطالبة مدفوعة";
+                            }
+                                else
+                                {
+                                    btnClass = "btn-success"; // Default button class (optional)
+
+                                }
+                            }
+
+                            <button class="btn @btnClass ">@btnText</button>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+
+@section scripts {
+    <script src="~/js/search.js"></script>
+}

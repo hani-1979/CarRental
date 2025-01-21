@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar with Dropdown and Download Button</title>
+    <!-- Include Bootstrap CSS (CDN) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom style to fix the sidebar height */
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="container-fluid">
+            <h3>Sidebar</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Services
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Web Development</a>
+                        <a class="dropdown-item" href="#">Graphic Design</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">SEO Services</a>
+                    </div>
+                </li>
+                <!-- Download Button -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#" download="file.zip">
+                        <button class="btn btn-success">Download</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Welcome to the Page</h1>
+        <p>This is a simple page with a sidebar that has a dropdown and a download button.</p>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (CDN) -->
+   
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery/dist/jquery.slim.min.js"></script>
+    <script src="/lib/jquery/dist/jquery.slim.js"></script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="/lib/bootstrap/js/popper.js/cjs/popper.js"></script>
+    <script src="/lib/bootstrap/js/popper.js/cjs/popper.min.js"></script>
+
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.esm.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.esm.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>

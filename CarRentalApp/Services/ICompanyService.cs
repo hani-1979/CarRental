@@ -10,5 +10,7 @@ namespace CarRentalApp.Services
         Task addCompany(Company company);
         Task updateCompany(Company company);
         Task deleteCompany(int id);
+        Task<int?> GetCompanyByAccidentIdAsync(int id);
+        Task<int?> GetCompanyByCarIdAsync(int id);
     }
 }

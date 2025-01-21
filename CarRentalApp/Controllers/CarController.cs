@@ -1,4 +1,5 @@
-﻿using CarRentalApp.Models;
+﻿using CarRentalApp.Data;
+using CarRentalApp.Models;
 using CarRentalApp.Services;
 using CarRentalApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -18,23 +19,42 @@ namespace CarRentalApp.Controllers
         private readonly IManufactorerservice _manufactorerservice;
         private readonly IModeelService _modeelService;
         private readonly IClassificationService _classificationService;
+        private readonly AppDbContext _context;
 
         public CarController(ICarService carService,IBranchService branchService,IColourService colourService,
             IManufactorerservice manufactorerservice,
-            IModeelService modeelService, IClassificationService classificationService)
+            IModeelService modeelService, IClassificationService classificationService,AppDbContext context)
         {
             _carService = carService;
             _branchService = branchService;
             _modeelService = modeelService;
             _manufactorerservice = manufactorerservice;
             _classificationService = classificationService;
+            _context = context;
             _colourService = colourService;
         }
       
         public async Task<IActionResult> Index()
         {
-            var model = await _carService.GetAllCarsAsync();
-            return View(model);
+            var CarData = from Car in _context.Cars
+                              
+                               join Modeel in _context.Modeels on Car.ModeelId equals Modeel.ModeelId
+                               // join AccidentAttachment in _context.accidentAttachments on accident.AccidentId equals AccidentAttachment.AccidentId
+
+                               select new CarCreateViewModel
+                               {
+                                   CarId = Car.CarId,
+                                   PlateNumber = Car.PlateNumber,
+                                   ChassisNumber = Car.ChassisNumber,
+                                   ModeelNameAr = Modeel.ModeelNameAr,
+                                  
+                                   
+
+                               };
+
+            // Execute the query and get the results
+            var resultList = CarData.ToList();
+            return View(CarData);
         }
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -58,7 +78,7 @@ namespace CarRentalApp.Controllers
                 if (ModelState.IsValid)
 
                 {
-                    
+
                     Car car = new Car()
                     {
                         Yearfmanufacture = model.Yearfmanufacture,
@@ -68,14 +88,17 @@ namespace CarRentalApp.Controllers
                         Modeel = await _modeelService.GetModeelByIdAsync(model.ModeelId),
                         Classification = await _classificationService.GetClassificationByIdAsync(model.classificationId),
                         ChassisNumber = model.ChassisNumber,
-                        PlateNumber= model.PlateNumber,
-                        FormNumber= model.FormNumber,
-                        BDFormNumber= model.BDFormNumber,
+                        PlateNumber = model.PlateNumber,
+                        FormNumber = model.FormNumber,
+                        BDFormNumber = model.BDFormNumber,
                         EDFormNumber = model.EDFormNumber,
                         CheckNumber = model.CheckNumber,
                         BDCheckNumber = model.BDCheckNumber,
                         EDCheckNumber = model.EDCheckNumber,
-                        CartNumber = model.CartNumber
+                        CartNumber = model.CartNumber,
+                        InsuraceStatus = 0,
+                        AccidenStatus = 0,
+                        ClaimStatus = 0,
                     };
 
                     await _carService.AddCarAsync(car);
@@ -90,6 +113,12 @@ namespace CarRentalApp.Controllers
 
                 throw;
             }
+        }
+        [HttpGet]
+        public JsonResult GetModelsByManufacturer(int ManufactorerId)
+        {
+            var models = _context.Modeels.Where(m => m.ManufactorerId == ManufactorerId).ToList();
+            return Json(models);
         }
 
     }

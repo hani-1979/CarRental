@@ -35,5 +35,10 @@ namespace CarRentalApp.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task UpdateInsuranceStatus(int Id)
+        {
+             await _insuranceRepository.UpdateInsuranceStatusAsync(Id);
+        }
     }
 }

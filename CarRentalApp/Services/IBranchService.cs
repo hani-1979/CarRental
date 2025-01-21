@@ -9,5 +9,7 @@ namespace CarRentalApp.Services
         Task AddBranchAsync(Branch branch);
         Task UpdateBranchAsync(Branch branch);
         Task DeleteBranchAsync(int id);
+        Task<int?> GetBranchByCarIdAsync(int id);
+        
     }
 }

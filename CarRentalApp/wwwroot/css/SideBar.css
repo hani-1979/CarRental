@@ -1,0 +1,99 @@
+﻿/* Reset default margins and padding */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+
+}
+.sidebar.bg-primary {
+    color: white;
+}
+/* Navbar Styles (fixed at the top) */
+.navbar {
+    z-index: 1000; /* Ensure navbar stays on top */
+    background-color: #ff0000; /* Change navbar color to blue */
+
+}
+    /* Optionally, you can change the color of the navbar links to white for better contrast */
+    .navbar .navbar-nav .nav-link {
+        color: white; /* Change link text color to white */
+    }
+
+        .navbar .navbar-nav .nav-link:hover {
+            color: #f8f9fa; /* Change link hover color to light gray */
+            background-color: #0056b3; /* Darker blue background on hover */
+
+        }
+
+/* Sidebar Styles (fixed on the left side) */
+.sidebar {
+    position: fixed; /* Fixed position */
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 200px; /* Sidebar width */
+    background-color: #f8f9fa;
+    padding-top: 60px; /* Space for the navbar */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    text-align: center; /* Center the text inside */
+    align-items: center; /* Center horizontally */
+    font-family: 'Amiri', serif; /* Apply Amiri font */
+    color: white /* Change link text color to white */
+}
+
+    .sidebar .nav-item {
+        margin-bottom: 15px;
+    }
+
+    .sidebar .nav-link {
+        font-size: 16px;
+        padding: 10px 15px;
+        color: #333;
+        text-decoration: none;
+        color:white;
+    }
+
+        .sidebar .nav-link:hover {
+            color: #f8f9fa; /* Change link hover color to light gray */
+            background-color: #0056b3; /* Darker blue background on hover */
+        }
+sidebar .nav-link i {
+    color: white; /* Change link text color to white */
+    margin-right: 10px; /* Add some space between icon and text */
+    font-size: 18px; /* Adjust icon size */
+}
+
+/* Change icon color on hover */
+.sidebar .nav-link:hover i {
+    color: #fff; /* Change icon color to white when hovered */
+}
+
+/* Main content area */
+.main-content {
+    margin-left: 250px; /* Make space for sidebar */
+    padding-top: 80px; /* Space for the fixed navbar */
+    padding: 20px;
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Make the content scrollable */
+}
+
+/* Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    /* On small screens, sidebar and navbar need to be adjusted */
+    .sidebar {
+        width: 200px; /* Reduce width on smaller screens */
+    }
+
+    .main-content {
+        margin-left: 0; /* Make content span full width */
+        padding-top: 60px; /* Adjust for collapsed navbar */
+    }
+
+    /* Navbar collapse behavior */
+    .navbar-toggler {
+        display: block; /* Show the hamburger menu on mobile */
+    }
+}

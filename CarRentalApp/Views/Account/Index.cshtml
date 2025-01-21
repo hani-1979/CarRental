@@ -1,0 +1,76 @@
+﻿@model IEnumerable<CarRentalApp.ViewModels.RegistrationViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div style="padding-top:80px"></div>
+<div class="container">
+    <div class="col-lg-10 col-lg-offset-2">
+        <div class="row">
+            <div class="col-sm-2">
+                <a asp-action="Registration" class="btn btn-success">إضافة مستخدم</a>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-xs-6 col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="بحث" id="myInput" onkeyup="myFunction()" />
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">
+                            <span class="bi bi-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding-top:10px"></div>
+
+        <table class="table table-hover" id="myTable">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Branch)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchNameAr)
+            </td>
+           
+            <td>
+                            <a asp-action="Edit" asp-route-id="@item.userId"><i class="bi bi-pencil"></i></a> |
+                            <a asp-action="Details" asp-route-id="@item.userId"><i class="bi bi-eye"></i></a> |
+                            <a asp-action="Delete" asp-route-id="@item.userId"><i class="bi bi-archive"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+</div>
+@section scripts {
+    <script src="~/js/search.js"></script>
+}
+

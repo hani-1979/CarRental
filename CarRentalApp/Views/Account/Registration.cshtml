@@ -4,10 +4,15 @@
     ViewData["Title"] = "Registration";
 }
 
-<h1>Registration</h1>
+<div style="padding-top:80px"></div>
 
-<h4>RegistrationViewModel</h4>
-<hr />
+<div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+    <div class="card" style="width: 58rem;">
+
+
+        <div class="card-body">
+            <h5 class="card-title">إضافة مستخدم جديد</h5>
+            <div style="padding-top:20px"></div>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Registration">
@@ -43,17 +48,19 @@
                     <input class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
                 </label>
             </div>
+                        <div style="padding-top:20px"></div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="إضافة" class="btn btn-primary" />
+                            <a asp-action="Index" class="btn btn-warning">عودة إلى السابق</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
+</div>
+</div>
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

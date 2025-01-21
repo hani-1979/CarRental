@@ -1,0 +1,71 @@
+﻿
+
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<div style="padding-top:80px"></div>
+<form id="statusForm" asp-action="UpdateStatus" method="post" enctype="multipart/form-data">
+<div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+    <div class="card" style="width: 58rem;">
+
+
+        <div class="card-body">
+                <h5 style="color:red" class="card-title"> متابعة حالة المطالبة :</h5>
+            <div style="padding-top:20px"></div>
+
+
+    <div>
+        <label><input type="radio" name="statusCode" value="2" /> نقص المستندات</label>
+    </div>
+                <div style="padding-top:10px"></div>
+    <div>
+        <label>
+            <input type="radio" name="statusCode" value="3" />المطابة مدفوعة
+        </label>
+    </div>
+                <div style="padding-top:10px"></div>
+    <div>
+        <label><input type="radio" name="statusCode" value="4" /> المطالبة مرفوضة</label>
+    </div>
+
+                <div style="padding-top:20px"></div>
+                <div class="form-group">
+                <label for="Comment">إضافة تعليق</label>
+                <textarea class="form-control" id="Comment" name="Comment" required></textarea>
+            </div>
+                <div style="padding-top:10px"></div>
+                <div class="form-group">
+                   
+                    <input type="file" id="file" name="Photo" />
+                </div>
+        </div>
+    <!-- Hidden input to pass the CarClaimId to the controller -->
+            <input type="hidden" name="carClaimId" value="@ViewBag.carClaimId" />
+            <input type="hidden" name="accidentId" value="@ViewBag.accidentId" />
+            
+
+    <!-- Submit button to trigger the status update -->
+    <button type="submit" class="btn btn-primary">تعديل الحالة</button>
+    </div>
+    </div>
+
+    
+</form>
+
+<script>
+    // Show file upload field only if the "Paid" status is selected
+    document.querySelectorAll('input[name="statusCode"]').forEach((radio) => {
+        radio.addEventListener('change', function () {
+            if (this.value == "3") {  // "Paid" status selected (value="3")
+                document.getElementById('file').style.display = 'block';
+            } else {
+                document.getElementById('file').style.display = 'none';
+            }
+        });
+    });
+</script>

@@ -9,5 +9,8 @@ namespace CarRentalApp.Services
         Task AddCarAsync(Car car);
         Task UpdateCarAsync(Car car);
         Task DeleteCarAsync(int id);
+        Task<Car> GetCarsByAccidentStatusAsync(int Status);
+        Task UpdateCarAccidentStatusAsync(int Id);
+        
     }
 }

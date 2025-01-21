@@ -19,6 +19,11 @@ namespace CarRentalApp.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public Task<Colour> ChangAccidentStatusStatusAsync(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task DeleteAsync(int id)
         {
             throw new NotImplementedException();
@@ -29,12 +34,59 @@ namespace CarRentalApp.Repositories
             return await _context.Colour.ToListAsync();
         }
 
+        public Task<Colour> GetByAccidentStatusAsync(int AccidentStatus)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Colour> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }
 
+        public Task<Colour> GetByInsuranceStatusAsync(int InsuranceStatus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Colour>> GetByStatuteAsync(int statute)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int?> GetCarIdByAccidentIdAsync(int accidentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int?> GetCompanyByAccidentIdAsync(int accidentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Colour> UpdateAccidentStatusAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Colour> UpdateAccidentStatusAsync(int Id, string status)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task UpdateAsync(Colour entity)
+        {
+            throw new NotImplementedException();
+        }
+
+       
+
+        Task<Colour> IRepository<Colour>.UpdateClaimStatusAsync(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Colour> IRepository<Colour>.UpdateInsuranceStatusAsync(int Id)
         {
             throw new NotImplementedException();
         }

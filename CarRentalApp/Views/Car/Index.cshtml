@@ -1,21 +1,30 @@
-﻿@model IEnumerable<CarRentalApp.Models.Car>
-
+﻿@model IEnumerable<CarRentalApp.ViewModels.CarCreateViewModel>
+<link href="~/css/table.css" rel="stylesheet" />
+<link href="~/css/btnadd.css" rel="stylesheet" />
+<style>
+    .disabled-link {
+        color: grey;
+        pointer-events: none; /* Disable the link */
+        cursor: not-allowed;
+    }
+</style>
 @{
     ViewData["Title"] = "Index";
 }
 <div style="padding-top:80px"></div>
 <div class="container">
-    <div class="col-lg-10 col-lg-offset-2">
+   
+       
         <div class="row">
             <div class="col-sm-2">
-                <a asp-action="Create" class="btn btn-success">إضافة سيارة</a>
+            <a asp-action="Create" class="btn btn-success">إضافة سيارة</a>
             </div>
             <div class="col-lg-2"></div>
             <div class="col-lg-2"></div>
             <div class="col-lg-2"></div>
             <div class="col-xs-6 col-md-4">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" id="myInput" onkeyup="myFunction()" />
+                    <input type="text" class="form-control" placeholder="بحث" id="myInput" onkeyup="myFunction()" />
                     <div class="input-group-btn">
                         <button class="btn btn-primary" type="submit">
                             <span class="bi bi-search"></span>
@@ -25,50 +34,64 @@
             </div>
         </div>
 
-
-        <table class="table table-hover" id="myTable">
+        <div style="padding-top:10px"></div>
+        <table class="table" id="myTable">
             <thead>
         <tr>
-           
-            
             <th>
                 @Html.DisplayNameFor(model => model.CarId)
             </th>
-           
+            <th>
+                    @Html.DisplayNameFor(model => model.ModeelNameAr)
+                </th>
             <th>
                 @Html.DisplayNameFor(model => model.ChassisNumber)
             </th>
-            
-           
             <th>
                 @Html.DisplayNameFor(model => model.PlateNumber)
             </th>
-            <th></th>
-        </tr>
+
+                
+            </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-           
-            <td>
+
+
+                    <td>
+                
                 @Html.DisplayFor(modelItem => item.CarId)
             </td>
+                  
+                    <td>
+                        
+                      
+                        @Html.DisplayFor(modelItem => item.ModeelNameAr)
+                    </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Yearfmanufacture)
+                @Html.DisplayFor(modelItem => item.ChassisNumber)
             </td>
             
             <td>
                 @Html.DisplayFor(modelItem => item.PlateNumber)
             </td>
-            <td>
-                            <a asp-controller="Insurance" asp-action="Create" asp-route-id="@item.CarId"><i class="bi bi-folder2"></i></a> |
-                            <a asp-action="Details" asp-route-id="@item.CarId"><i class="bi bi-eye"></i></a> |
-                            <a asp-action="Delete" asp-route-id="@item.CarId"><i class="bi bi-archive"></i></a>
+
+                       
+                        <td>
+                        <a style="padding: 50px" title="one" asp-controller="Insurance" asp-action="Create" asp-route-id="@item.CarId"><i class="bi bi-shield-check text-success"></i></a> |
+
+                        <a style="padding: 50px" title="tow" asp-controller="Accident" asp-action="Create" asp-route-id="@item.CarId"><i class="bi bi-exclamation-circle text-danger"></i></a> |
+                            <a style="padding: 50px" title="Edit" asp-action="Details" asp-route-id="@item.CarId"><i class="bi bi-eye"></i></a> |
+                            <a style="padding: 50px" tite="Delete" asp-action="Delete" asp-route-id="@item.CarId"><i class="bi bi-archive"></i></a>
+                           
             </td>
         </tr>
 }
     </tbody>
 </table>
 </div>
+    @section scripts {
+        <script src="~/js/search.js"></script>
+    }
 
-</div>

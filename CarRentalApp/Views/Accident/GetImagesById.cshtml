@@ -1,0 +1,36 @@
+﻿@model List<string>
+<div style="padding-top:80px"></div>
+<h5>صور الحادث</h5>
+
+<style>
+    .image-container {
+        display: flex; /* يعرض الصور في صف أفقي */
+        flex-wrap: nowrap; /* لا يسمح بتكرار الصور في صفوف جديدة */
+        justify-content: flex-start; /* تحديد التوزيع الأفقي للصور */
+        gap: 20px; /* المسافة بين الصور */
+    }
+
+        .image-container img {
+            max-width: 100%; /* لضبط الصورة بحيث لا تتجاوز عرض الحاوية */
+            height: 500px; /* الحفاظ على الأبعاد الأصلية للصورة */
+            width: 500px; /* يمكنك تعديل هذا بناءً على الحجم المطلوب */
+        }
+</style>
+
+@if (Model != null && Model.Any())
+
+{
+
+    <div class="image-container">
+        @foreach (var imageUrl in Model)
+    {
+        <div class="image-container">
+            <img src="@imageUrl" class="image" />
+        </div>
+    }
+    </div>
+}
+else
+{
+    <p>No images found to display.</p>
+}

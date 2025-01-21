@@ -19,6 +19,11 @@ namespace CarRentalApp.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public Task<Modeel> ChangAccidentStatusStatusAsync(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task DeleteAsync(int id)
         {
             throw new NotImplementedException();
@@ -29,14 +34,56 @@ namespace CarRentalApp.Repositories
             return await _context.Modeels.ToListAsync();
         }
 
+        public Task<Modeel> GetByAccidentStatusAsync(int AccidentStatus)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Modeel> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
+        }
+
+        public Task<Modeel> GetByInsuranceStatusAsync(int InsuranceStatus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Modeel>> GetByStatuteAsync(int statute)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int?> GetCarIdByAccidentIdAsync(int accidentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int?> GetCompanyByAccidentIdAsync(int accidentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Modeel> UpdateAccidentStatusAsync(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public Task UpdateAsync(Modeel entity)
         {
             throw new NotImplementedException();
         }
+
+        public Task<Modeel> UpdateClaimStatusAsync(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Modeel> UpdateInsuranceStatusAsync(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

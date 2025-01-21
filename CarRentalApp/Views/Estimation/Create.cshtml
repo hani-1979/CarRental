@@ -1,0 +1,78 @@
+﻿@model CarRentalApp.Models.Estimation
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div style="padding-top:100px"></div>
+
+<div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+    <div class="card" style="width: 58rem;">
+
+
+        <div class="card-body">
+            <h5 style="color:red" class="card-title"> بيانات تقدير السيارة</h5>
+            <div style="padding-top:20px"></div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <input hidden asp-for="AccidentId" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                     
+                        <div class="form-group">
+                            <label asp-for="EstimationNumber" class="control-label"></label>
+                            <input asp-for="EstimationNumber" class="form-control" />
+                            <span asp-validation-for="EstimationNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EstimationDate" class="control-label"></label>
+                            <input asp-for="EstimationDate" class="form-control" type="date" />
+                            <span asp-validation-for="EstimationDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EstimationSide" class="control-label"></label>
+                            <input asp-for="EstimationSide" class="form-control"  />
+                            <span asp-validation-for="EstimationSide" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EstimationAmount" class="control-label"></label>
+                            <input asp-for="EstimationAmount" class="form-control" />
+                            <span asp-validation-for="EstimationAmount" class="text-danger"></span>
+                        </div>
+
+                     
+                        <div style="padding-top:10px"></div>
+                        <div class="form-group">
+                            <input type="submit" value="إضافة" class="btn btn-primary" />
+                            <a asp-action="Index" class="btn btn-warning"> عودة إلى السابق</a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileLabel = $(this).next('.custom-file-label');
+                var files = $(this)[0].files;
+                if (files.length > 1) {
+                    fileLabel.html(files.length + ' files selected');
+                }
+                else if (files.length == 1) {
+                    fileLabel.html(files[0].name);
+                }
+            });
+        });
+    </script>
+}

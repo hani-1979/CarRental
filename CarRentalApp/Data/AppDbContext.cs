@@ -1,6 +1,7 @@
 ﻿using CarRentalApp.Models;
 using Microsoft.EntityFrameworkCore;
 using CarRentalApp.ViewModels;
+using CarRentalApp.Controllers;
 //using CarRentalApp.ViewModels;
 
 namespace CarRentalApp.Data
@@ -18,7 +19,14 @@ namespace CarRentalApp.Data
         public DbSet<Insurance> Insurances { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<UserAccount> userAccounts { get; set; }
-        
+        public DbSet<Accident> Accidents { get; set; }
+        public DbSet<carClaim> carClaim { get; set; }
+        public DbSet<Estimation> Estimations { get; set; }
+        public DbSet<AccidentAttachment> accidentAttachments { get; set; }
+        public DbSet<AccidentPicAttachment> accidentPicAttachments { get; set; }
+        public DbSet<ClaimAttachment> ClaimAttachments { get; set; }
+        public DbSet<ClaimStatus> ClaimStatuses {  get; set; }
+        public DbSet<Trafficreport> Trafficreports { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -35,12 +43,19 @@ namespace CarRentalApp.Data
                 .HasOne(c => c.Modeel)
                 .WithMany(m => m.Cars)
                 .HasForeignKey(c => c.ModeelId)
-                .OnDelete(DeleteBehavior.Restrict);  // Avoid cascade delete for ModelId
-                 modelBuilder.Entity<InsuranceViewModel>().Ignore(i => i.Photo);
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<carClaim>()
+            .HasOne(c => c.Estimation)  // Each CarClaim has one Estimation
+            .WithMany(e => e.carClaims) // Each Estimation can have many CarClaims
+            .HasForeignKey(c => c.EstimationId)  // Foreign Key in CarClaim
+            .OnDelete(DeleteBehavior.Restrict);
+
         }
+    }
         
        
 
     }
    
-}
+

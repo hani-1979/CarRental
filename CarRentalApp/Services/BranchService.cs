@@ -1,14 +1,19 @@
-﻿using CarRentalApp.Models;
+﻿using CarRentalApp.Data;
+using CarRentalApp.Models;
 using CarRentalApp.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarRentalApp.Services
 {
     public class BranchService : IBranchService
     {
         private readonly IRepository<Branch> _branchRepository;
-        public BranchService(IRepository<Branch> branchRepository)
+        private readonly AppDbContext _context;
+
+        public BranchService(IRepository<Branch> branchRepository,AppDbContext context)
         {
             _branchRepository = branchRepository;
+            _context = context;
         }
         public async Task AddBranchAsync(Branch branch)
         {
@@ -33,6 +38,15 @@ namespace CarRentalApp.Services
         public Task UpdateBranchAsync(Branch branch)
         {
             throw new NotImplementedException();
+        }
+        public async Task<int?> GetBranchByCarIdAsync(int id)
+        {
+            var BranchId = await _context.Cars
+         .Where(i => i.CarId == id)
+         .Select(i => i.BranchId) // Return only the CompanyId
+         .FirstOrDefaultAsync(); // Returns null if no match is found
+
+            return BranchId;
         }
     }
 }

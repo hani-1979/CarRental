@@ -2,10 +2,20 @@
 
 
 
-<h1>إضافة سيارة</h1>
+<div style="padding-top:100px"></div>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<style>
+    .datepicker {
+        z-index: 9999 !important;
+    }
+</style>
+<div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+    <div class="card" style="width: 58rem;">
 
 
-<div style="padding-top:45px"></div>
+        <div class="card-body">
+            <h5 style="color:red" class="card-title">إضافة بيانات السيارة :</h5>
+            <div style="padding-top:20px"></div>
 <form asp-action="Create">
    
     <div class="container">
@@ -31,15 +41,17 @@
             <div class="row">
             <div class="col-md-3">
             <div class="form-group">
-                <label asp-for="ManufactorerId" id="ManufactorerId" class="control-label"></label>
+                                <label asp-for="ManufactorerId" id="ManufactorerId" name="ManufacturerId" class="control-label"></label>
                 <select asp-for="ManufactorerId" class="form-control" asp-items="@(new SelectList(Model.manufactorers,"ManufactorerId","ManufactorNameAr"))"></select>
             </div>
                 </div>
             <div class="col-md-3">
-            <div class="form-group">
-                <label asp-for="ModeelId" class="control-label"></label>
-                <select asp-for="ModeelId" class="form-control" asp-items="@(new SelectList(Model.modeels,"ModeelId","ModeelNameAr"))"></select>
-            </div>
+                            <div class="form-group">
+                                <label for="ModeelId">Car Model</label>
+                                <select id="ModeelId" name="ModeelId" class="form-control">
+                                    <option value="">Select Model</option>
+                                </select>
+                            </div>
             </div>
             <div class="col-md-3">
             <div class="form-group">
@@ -48,7 +60,7 @@
             </div>
         </div>
         </div>
-        <div class="row">
+            <div class="row">
             <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="ChassisNumber" class="control-label"></label>
@@ -56,23 +68,24 @@
                 <span asp-validation-for="ChassisNumber" class="text-danger"></span>
             </div>
             </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="PlateNumber" class="control-label"></label>
+                                <input asp-for="PlateNumber" class="form-control" />
+                                <span asp-validation-for="PlateNumber" class="text-danger"></span>
+                            </div>
+                        </div>
             <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="Yearfmanufacture" class="control-label"></label>
-                <input asp-for="Yearfmanufacture" class="form-control" />
+                                <input asp-for="Yearfmanufacture" id="datepicker" class="form-control" type="date" placeholder="Select a date" />
                 <span asp-validation-for="Yearfmanufacture" class="text-danger"></span>
             </div>
             </div>
            
         </div>
-        <div class="row">
-            <div class="col-md-3">
-            <div class="form-group">
-                <label asp-for="PlateNumber" class="control-label"></label>
-                <input asp-for="PlateNumber" class="form-control" />
-                <span asp-validation-for="PlateNumber" class="text-danger"></span>
-            </div>
-        </div>
+            <div class="row">
+         
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="CartNumber" class="control-label"></label>
@@ -80,33 +93,40 @@
                     <span asp-validation-for="CartNumber" class="text-danger"></span>
                 </div>
             </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="EDCartNumber" class="control-label"></label>
+                                <input asp-for="EDCartNumber" id="datepicker" class="datepicker" type="date" placeholder="Select a date" />
+                                <span asp-validation-for="EDCartNumber" class="text-danger"></span>
+                            </div>
+                        </div>
         <br />
         </div>
-         <div class="row">
+            <div class="row">
             <div class="col-md-3">
             <div class="form-group">
                     <label asp-for="FormNumber" class="control-label"></label>
-                    <input asp-for="FormNumber" class="form-control" />
+                                <input asp-for="FormNumber" class="form-control" />
                     <span asp-validation-for="FormNumber" class="text-danger"></span>
             </div>
             </div>
             <div class="col-md-3">
             <div class="form-group">
-                    <label asp-for="BDFormNumber" class="control-label"></label>
-                    <input asp-for="BDFormNumber" class="form-control" placeholder="MM/DD/YYYY" />
+                                <label asp-for="BDFormNumber"  class="control-label"></label>
+                                <input asp-for="BDFormNumber" id="datepicker" class="datepicker" type="date" />
                     <span asp-validation-for="BDFormNumber" class="text-danger"></span>
             </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="EDFormNumber" class="control-label"></label>
-                    <input asp-for="EDFormNumber" class="form-control" placeholder="MM/DD/YYYY" />
+                                <input asp-for="EDFormNumber" id="datepicker" class="form-control" type="date" placeholder="Select a date" />
                     <span asp-validation-for="EDFormNumber" class="text-danger"></span>
                 </div>
             </div>
            
         </div>
-        <div class="row">
+           <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="CheckNumber" class="control-label"></label>
@@ -117,14 +137,14 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="BDCheckNumber" class="control-label"></label>
-                    <input asp-for="BDCheckNumber" class="form-control" />
+                                <input asp-for="BDCheckNumber" id="datepicker" class="form-control" type="date" placeholder="Select a date" />
                     <span asp-validation-for="BDCheckNumber" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="EDCheckNumber" class="control-label"></label>
-                    <input asp-for="EDCheckNumber" class="form-control" />
+                                <input asp-for="EDCheckNumber" id="datepicker" class="form-control" type="date" placeholder="Select a date" />
                     <span asp-validation-for="EDCheckNumber" class="text-danger"></span>
                 </div>
             </div>
@@ -138,12 +158,46 @@
             </div>
             </div>
 </form>
-
+</div>
+</div>
 <div>
-    
+    </div>
    
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/date.js"></script>
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.slim.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // عند تغيير المُصنِّع
+            $('#ManufactorerId').change(function () {
+                var ManufactorerId = $(this).val();
+                if (ManufactorerId) {
+                    $.ajax({
+                        url: '@Url.Action("GetModelsByManufacturer", "Car")',
+                        data: { ManufactorerId: ManufactorerId },
+                        success: function (data) {
+                            var modelSelect = $('#ModeelId');
+                            modelSelect.empty(); // إفراغ القائمة الحالية
+                            modelSelect.append('<option value="">Select Model</option>'); // إضافة الخيار الافتراضي
+
+                            // إضافة النماذج المتاحة
+                            $.each(data, function (i, model) {
+                                modelSelect.append('<option value="' + model.ModeelId + '">' + model.ModeelNameAr + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#ModeelId').empty(); // إفراغ قائمة النماذج إذا لم يتم اختيار مُصنِّع
+                    $('#ModeelId').append('<option value="">Select Model</option>');
+                }
+            });
+        });
+    </script>
 }

@@ -13,6 +13,7 @@ namespace CarRentalApp.ViewModels
         public int ModeelId { get; set; }
         [DisplayName("إسم الشركة المصنعة")]
         public int ManufactorerId { get; set; }
+        [ValidateNever]
         public string ManufactorNameAr { get; set; }
         [ValidateNever]
         public Manufactorer? Manufactorer { get; set; }

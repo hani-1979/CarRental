@@ -1,5 +1,6 @@
 ﻿using CarRentalApp.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel;
@@ -12,16 +13,24 @@ namespace CarRentalApp.ViewModels
     public class CarCreateViewModel
     {
         [Key]
+        [DisplayName("الرقم")]
         public int CarId { get; set; } 
         public bool HasNoKey => CarId == null;
-        public string? CarName { get; set; }
+        [DisplayName("تأريخ نهاية الكارت")]
+        public DateTime? EDCartNumber { get; set; }
         [DisplayName("الفرع")]
         public int BranchId { get; set; }
         [ValidateNever]
         public Branch? Branch { get; set; }
-        [DisplayName("إسم السيارة")]
-        
+       
+        public int InsuranceId { get; set; }
+        [DisplayName("الموديل")]
         public int ModeelId { get; set; }
+        [ValidateNever]
+        public int SelectedManufactorerId { get; set; }
+        [ValidateNever]
+        public IEnumerable<SelectListItem> mo {  get; set; }
+        public int? SelectedModeelId { get; set; }
         [ValidateNever]
         public Modeel? Modeel { get; set; }
         [ValidateNever]
@@ -32,16 +41,20 @@ namespace CarRentalApp.ViewModels
         [ValidateNever]
         public Classification? Classification { get; set; }
         [DisplayName("رقم الهيكل")]
-        public string? ChassisNumber { get; set; }
+        [Required(ErrorMessage = " الرجاء أدخال رقم رقم الهيكل ")]
+        public string ChassisNumber { get; set; }
         [DisplayName("سنة الصنع")]
         public DateTime? Yearfmanufacture { get; set; }
         [DisplayName("اللون")]
         public int ColourId { get; set; }
         [ValidateNever]
-
+        [DisplayName("طراز السيارة")]
+        public string ModeelNameAr { get; set; }
+        [ValidateNever]
         public List<Colour> colours { get; set; }
         [DisplayName("رقم اللوحة")]
-        public string? PlateNumber { get; set; }
+        [Required(ErrorMessage = " الرجاء أدخال رقم اللوحة ")]
+        public string PlateNumber { get; set; }
         [ValidateNever]
         public List<Branch> branches { get; set; }
         
@@ -65,6 +78,8 @@ namespace CarRentalApp.ViewModels
         public DateTime? EDCheckNumber { get; set; }
         [DisplayName("رقم الكارت")]
         public string? CartNumber { get; set; }
+        public int InsuraceStatus { get; set; }
+        public int ClaimStatus { get; set; }
 
 
     }

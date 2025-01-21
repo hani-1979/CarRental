@@ -2,6 +2,7 @@
 using CarRentalApp.Models;
 using CarRentalApp.Services;
 using CarRentalApp.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.IO.Compression;
@@ -14,14 +15,16 @@ namespace CarRentalApp.Controllers
         private readonly ICompanyService _companyService;
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly AppDbContext _context;
+        private readonly ICarService _carService;
         private readonly string _uploadFolderPath;
 
-        public InsuranceController(IInsuranceService insuranceService, ICompanyService companyService, IWebHostEnvironment hostEnvironment, AppDbContext context, IHostEnvironment environment)
+        public InsuranceController(IInsuranceService insuranceService, ICompanyService companyService, IWebHostEnvironment hostEnvironment, AppDbContext context, IHostEnvironment environment, ICarService carService)
         {
             _insuranceService = insuranceService;
             _companyService = companyService;
             _hostEnvironment = hostEnvironment;
             _context = context;
+            _carService = carService;
             _uploadFolderPath = Path.Combine(environment.ContentRootPath, "wwwroot", "images");
             if (!Directory.Exists(_uploadFolderPath))
             {
@@ -30,8 +33,23 @@ namespace CarRentalApp.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var model = await _insuranceService.GetAllInsuranceAsync();
-            return View(model);
+            var ins = from Insurance in _context.Insurances
+                      join car in _context.Cars on Insurance.CarId equals car.CarId
+                      join company in _context.Companys on Insurance.CompanyId equals company.CompanyId
+                      select new InsuranceViewModel
+                      {
+
+                          InsuranceId = Insurance.InsuranceId,
+                          CompanyNameAr = company.CompanyNameAr,
+                          PlateNumber = car.PlateNumber,
+                          PolicyNumber = Insurance.PolicyNumber,
+                          BDPolicyNumber = Insurance.BDPolicyNumber,
+                          EDPolicyNumber = Insurance.EDPolicyNumber // Assuming the Manufacturer model has a 'Name' property
+                      };
+
+            // Execute the query and get the results
+            var resultList = ins.ToList();
+            return View(ins);
 
         }
         [HttpGet]
@@ -58,6 +76,7 @@ namespace CarRentalApp.Controllers
                     string uniqueFileName = ProcessUplodedFile(model);
                     Insurance insurance = new Insurance()
                     {
+
                         Company = await _companyService.GetCompanyById(model.CompanyId),
                         CarId = model.CarId,
                         PolicyNumber = model.PolicyNumber,
@@ -66,6 +85,7 @@ namespace CarRentalApp.Controllers
                         PhothPath = uniqueFileName
                     };
                     await _insuranceService.AddInsurace(insurance);
+                    await _insuranceService.UpdateInsuranceStatus(insurance.CarId);
 
                     if (files != null)
                     {
@@ -91,6 +111,7 @@ namespace CarRentalApp.Controllers
                                 _context.Attachments.Add(attachment);
                             }
                         }
+
                         await _context.SaveChangesAsync();
                     }
                     return RedirectToAction(nameof(Index));
@@ -152,6 +173,8 @@ namespace CarRentalApp.Controllers
 
             return uniqueFileName;
         }
+        
     }
-    }
+}
+    
 

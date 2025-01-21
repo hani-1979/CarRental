@@ -1,5 +1,7 @@
 ﻿using CarRentalApp.Models;
 using CarRentalApp.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Mono.TextTemplating;
 
 namespace CarRentalApp.Services
 {
@@ -32,11 +34,37 @@ namespace CarRentalApp.Services
         }
 
        
+
+        public Task<Car> GetCarsByAccidentStatusAsync(int Status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Car>> GetCarsByStatusAsync(int Status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Car> GetCarsByStatuteAsync(int Status)
+        {
+            return await _carRepository.GetByInsuranceStatusAsync(Status);
+        }
+
+        public async Task UpdateCarAccidentStatusAsync(int Id)
+        {
+           await _carRepository.UpdateAccidentStatusAsync(Id);
+        }
+
         public Task UpdateCarAsync(Car car)
         {
             throw new NotImplementedException();
         }
 
-       
+        public Task UpdateCarAsync(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

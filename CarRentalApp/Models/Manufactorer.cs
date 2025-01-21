@@ -12,5 +12,7 @@ namespace CarRentalApp.Models
         public string? ManufactorNameEn { get; set; }
         [ValidateNever]
         public ICollection<Car> Cars { get; set; }
+        [ValidateNever]
+        public ICollection<Modeel> modeels { get; set; }
     }
 }

@@ -288,7 +288,7 @@ namespace CarRentalApp.Controllers
 
                 foreach (var attachment in accident.accidentPicAttachment)
                 {
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", attachment.FilePath.TrimStart('/'));
+                    var filePath = Path.Combine(_hostEnvironment.ContentRootPath, "wwwroot", attachment.FilePath.TrimStart('/'));
                     if (System.IO.File.Exists(filePath))
                     {
                         string imageUrl = attachment.FilePath.StartsWith("AccidentPic/")

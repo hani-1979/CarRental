@@ -38,37 +38,48 @@
             </div>
            
             </div>
-            <div class="row">
-            <div class="col-md-3">
-            <div class="form-group">
-                                <label asp-for="ManufactorerId" id="ManufactorerId" name="ManufacturerId" class="control-label"></label>
-                <select asp-for="ManufactorerId" class="form-control" asp-items="@(new SelectList(Model.manufactorers,"ManufactorerId","ManufactorNameAr"))"></select>
-            </div>
-                </div>
-            <div class="col-md-3">
+                    <div class="row">
+                        <!-- 1. الشركة المصنعة -->
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="ModeelId">Car Model</label>
-                                <select id="ModeelId" name="ModeelId" class="form-control">
-                                    <option value="">Select Model</option>
+                                <label asp-for="ManufactorerId" class="control-label"></label>
+                                <select asp-for="ManufactorerId" id="manufacturerDropdown" class="form-control"
+                                        asp-items="@(new SelectList(Model.manufactorers, "ManufactorerId", "ManufactorNameAr"))">
+                                    <option value="">-- اختر المصنّع --</option>
                                 </select>
                             </div>
-            </div>
-            <div class="col-md-3">
-            <div class="form-group">
-                <label asp-for="classificationId" class="control-label"></label>
-                <select asp-for="classificationId" class="form-control" asp-items="@(new SelectList(Model.classifications,"classificationId","classificationName"))"></select>
-            </div>
-        </div>
-        </div>
+                        </div>
+
+                        <!-- 2. الموديل -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="ModeelId" class="control-label"></label>
+                                <select asp-for="ModeelId" id="modelDropdown" class="form-control" disabled>
+                                    <option value="">-- اختر الموديل --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 3. التصنيف -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="classificationId" class="control-label"></label>
+                                <select asp-for="classificationId" class="form-control"
+                                        asp-items="@(new SelectList(Model.classifications, "classificationId", "classificationName"))">
+                                    <option value="">-- اختر التصنيف --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
             <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="ChassisNumber" class="control-label"></label>
                 <input asp-for="ChassisNumber" class="form-control" />
                 <span asp-validation-for="ChassisNumber" class="text-danger"></span>
             </div>
             </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="PlateNumber" class="control-label"></label>
                                 <input asp-for="PlateNumber" class="form-control" />
@@ -78,73 +89,76 @@
             <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="Yearfmanufacture" class="control-label"></label>
-                                <input asp-for="Yearfmanufacture" id="datepicker" class="form-control" type="date" placeholder="Select a date" />
+                                <input asp-for="Yearfmanufacture" id="datepicker" class="form-control" type="date"
+                                       value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                 <span asp-validation-for="Yearfmanufacture" class="text-danger"></span>
             </div>
             </div>
            
         </div>
-            <div class="row">
-         
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="CartNumber" class="control-label"></label>
-                    <input asp-for="CartNumber" class="form-control" />
-                    <span asp-validation-for="CartNumber" class="text-danger"></span>
-                </div>
-            </div>
-                        <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="CartNumber" class="control-label"></label>
+                                <input asp-for="CartNumber" class="form-control" />
+                                <span asp-validation-for="CartNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="EDCartNumber" class="control-label"></label>
-                                <input asp-for="EDCartNumber" id="datepicker" class="datepicker" type="date" placeholder="Select a date" />
+                                <input asp-for="EDCartNumber" class="form-control datepicker" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                                 <span asp-validation-for="EDCartNumber" class="text-danger"></span>
                             </div>
                         </div>
-        <br />
-        </div>
+                    </div>
             <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
             <div class="form-group">
                     <label asp-for="FormNumber" class="control-label"></label>
                                 <input asp-for="FormNumber" class="form-control" />
                     <span asp-validation-for="FormNumber" class="text-danger"></span>
             </div>
             </div>
-            <div class="col-md-3">
-            <div class="form-group">
-                                <label asp-for="BDFormNumber"  class="control-label"></label>
-                                <input asp-for="BDFormNumber" id="datepicker" class="datepicker" type="date" />
-                    <span asp-validation-for="BDFormNumber" class="text-danger"></span>
-            </div>
-            </div>
-            <div class="col-md-3">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="BDFormNumber" class="control-label"></label>
+                                <input asp-for="BDFormNumber" id="datepicker" class="form-control" type="date"
+                                       value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                <span asp-validation-for="BDFormNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+            <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="EDFormNumber" class="control-label"></label>
-                                <input asp-for="EDFormNumber" id="datepicker" class="form-control" type="date" placeholder="Select a date" />
+                                <input asp-for="EDFormNumber" id="datepicker" class="form-control" type="date" 
+                                value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                     <span asp-validation-for="EDFormNumber" class="text-danger"></span>
                 </div>
             </div>
            
         </div>
            <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="CheckNumber" class="control-label"></label>
                     <input asp-for="CheckNumber" class="form-control" />
                     <span asp-validation-for="CheckNumber" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="BDCheckNumber" class="control-label"></label>
-                                <input asp-for="BDCheckNumber" id="datepicker" class="form-control" type="date" placeholder="Select a date" />
+                                <input asp-for="BDCheckNumber" id="datepicker" class="form-control" type="date" 
+                                value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                     <span asp-validation-for="BDCheckNumber" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="EDCheckNumber" class="control-label"></label>
-                                <input asp-for="EDCheckNumber" id="datepicker" class="form-control" type="date" placeholder="Select a date" />
+                                <input asp-for="EDCheckNumber" id="datepicker" class="form-control" type="date" 
+                                value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                     <span asp-validation-for="EDCheckNumber" class="text-danger"></span>
                 </div>
             </div>
@@ -200,4 +214,38 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#manufacturerDropdown').change(function () {
+                var manufacturerId = $(this).val();
+                var modelDropdown = $('#modelDropdown');
+
+                if (manufacturerId) {
+                    modelDropdown.prop('disabled', false);
+
+                    $.ajax({
+                        url: '@Url.Action("GetModelsByManufacturer", "Car")', // تم التصحيح هنا
+                        type: 'GET',
+                        data: { manufactorerId: manufacturerId },
+                        success: function (data) {
+                            modelDropdown.empty();
+                            modelDropdown.append('<option value="">-- اختر الموديل --</option>');
+                            $.each(data, function (index, item) {
+                                modelDropdown.append($('<option></option>').val(item.modeelId).text(item.modeelNameAr));
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error:", error);
+                            alert('حدث خطأ أثناء جلب البيانات');
+                        }
+                    });
+                } else {
+                    modelDropdown.prop('disabled', true);
+                    modelDropdown.empty();
+                    modelDropdown.append('<option value="">-- اختر الموديل --</option>');
+                }
+            });
+        });
+    </script>
+
 }

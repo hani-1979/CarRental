@@ -2,17 +2,18 @@
 using CarRentalApp.Models;
 using CarRentalApp.Services;
 using CarRentalApp.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.Metrics;
-using System.Net.Mail;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CarRentalApp.Controllers
 {
     public class CarController : Controller
     {
-      
         private readonly ICarService _carService;
         private readonly IBranchService _branchService;
         private readonly IColourService _colourService;
@@ -20,10 +21,17 @@ namespace CarRentalApp.Controllers
         private readonly IModeelService _modeelService;
         private readonly IClassificationService _classificationService;
         private readonly AppDbContext _context;
+        private readonly ILogger<CarController> _logger;
 
-        public CarController(ICarService carService,IBranchService branchService,IColourService colourService,
+        public CarController(
+            ICarService carService,
+            IBranchService branchService,
+            IColourService colourService,
             IManufactorerservice manufactorerservice,
-            IModeelService modeelService, IClassificationService classificationService,AppDbContext context)
+            IModeelService modeelService,
+            IClassificationService classificationService,
+            AppDbContext context,
+            ILogger<CarController> logger)
         {
             _carService = carService;
             _branchService = branchService;
@@ -32,61 +40,70 @@ namespace CarRentalApp.Controllers
             _classificationService = classificationService;
             _context = context;
             _colourService = colourService;
+            _logger = logger;
         }
-      
+
         public async Task<IActionResult> Index()
         {
-            var CarData = from Car in _context.Cars
-                              
-                               join Modeel in _context.Modeels on Car.ModeelId equals Modeel.ModeelId
-                               // join AccidentAttachment in _context.accidentAttachments on accident.AccidentId equals AccidentAttachment.AccidentId
+            try
+            {
+                var cars = await _context.Cars
+                    .Include(c => c.Modeel)
+                    .Select(c => new CarCreateViewModel
+                    {
+                        CarId = c.CarId,
+                        PlateNumber = c.PlateNumber,
+                        ChassisNumber = c.ChassisNumber,
+                        ModeelNameAr = c.Modeel.ModeelNameAr,
+                    })
+                    .ToListAsync();
 
-                               select new CarCreateViewModel
-                               {
-                                   CarId = Car.CarId,
-                                   PlateNumber = Car.PlateNumber,
-                                   ChassisNumber = Car.ChassisNumber,
-                                   ModeelNameAr = Modeel.ModeelNameAr,
-                                  
-                                   
-
-                               };
-
-            // Execute the query and get the results
-            var resultList = CarData.ToList();
-            return View(CarData);
+                return View(cars);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving car list");
+                return View("Error");
+            }
         }
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var model = new CarCreateViewModel
+            try
             {
-                branches = (List<Branch>) await _branchService.GetAllBranchesAsync(),
-                manufactorers=(List<Manufactorer>) await _manufactorerservice.GetAllManufactorerAsync(),
-                modeels = (List<Modeel>)await _modeelService.GetAllModeelsAsync(),
-                classifications=(List<Classification>) await _classificationService.GetAllClassificationAsync(),
-                colours = (List<Colour>) await _colourService.GetAllColourAsync()
-            };
-            return View(model);
+                var model = new CarCreateViewModel
+                {
+                    branches = (List<Branch>)await _branchService.GetAllBranchesAsync(),
+                    manufactorers = await _context.Manufactorers.ToListAsync(),
+                    modeels = new List<Modeel>(),
+                    classifications = (List<Classification>)await _classificationService.GetAllClassificationAsync(),
+                    colours = (List<Colour>)await _colourService.GetAllColourAsync()
+                };
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error loading create car form");
+                return View("Error");
+            }
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(CarCreateViewModel model)
         {
             try
             {
-
                 if (ModelState.IsValid)
-
                 {
-
-                    Car car = new Car()
+                    var car = new Car()
                     {
                         Yearfmanufacture = model.Yearfmanufacture,
-                        Branch = await _branchService.GetBranchByIdAsync(model.BranchId),
-                        Colours = await _colourService.GetColourByIdAsync(model.ColourId),
-                        Manufactorer = await _manufactorerservice.GetManufactorerByIdAsync(model.ManufactorerId),
-                        Modeel = await _modeelService.GetModeelByIdAsync(model.ModeelId),
-                        Classification = await _classificationService.GetClassificationByIdAsync(model.classificationId),
+                        BranchId = model.BranchId,
+                        ColourId = model.ColourId,
+                        ManufactorerId = model.ManufactorerId,
+                        ModeelId = model.ModeelId,
+                        classificationId = model.classificationId,
                         ChassisNumber = model.ChassisNumber,
                         PlateNumber = model.PlateNumber,
                         FormNumber = model.FormNumber,
@@ -102,24 +119,50 @@ namespace CarRentalApp.Controllers
                     };
 
                     await _carService.AddCarAsync(car);
-                   
                     return RedirectToAction(nameof(Index));
                 }
 
-                return View();
+                await ReloadModelData(model);
+                return View(model);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
-                throw;
+                _logger.LogError(ex, "Error creating new car");
+                ModelState.AddModelError("", "حدث خطأ أثناء حفظ البيانات");
+                await ReloadModelData(model);
+                return View(model);
             }
         }
+
         [HttpGet]
-        public JsonResult GetModelsByManufacturer(int ManufactorerId)
+        public async Task<IActionResult> GetModelsByManufacturer(int manufactorerId)
         {
-            var models = _context.Modeels.Where(m => m.ManufactorerId == ManufactorerId).ToList();
-            return Json(models);
+            try
+            {
+                var models = await _context.Modeels
+                    .Where(m => m.ManufactorerId == manufactorerId)
+                    .Select(m => new {
+                        modeelId = m.ModeelId,
+                        modeelNameAr = m.ModeelNameAr
+                    })
+                    .ToListAsync();
+
+                return Json(models);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error getting models for manufacturer {manufactorerId}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
+        private async Task ReloadModelData(CarCreateViewModel model)
+        {
+            model.branches = (List<Branch>)await _branchService.GetAllBranchesAsync();
+            model.manufactorers = await _context.Manufactorers.ToListAsync();
+            model.classifications = (List<Classification>)await _classificationService.GetAllClassificationAsync();
+            model.colours = (List<Colour>)await _colourService.GetAllColourAsync();
+            model.modeels = new List<Modeel>();
+        }
     }
 }

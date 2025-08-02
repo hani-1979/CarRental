@@ -24,6 +24,7 @@ namespace CarRentalApp.ViewModels
         [ValidateNever]
         public int CompanyId { get; set; }
         [ValidateNever]
+        [DisplayName("نوع التقرير")]
         public int TrafficreportId { get; set; }
         [ValidateNever]
         public string TrafficreportName { get; set; }
